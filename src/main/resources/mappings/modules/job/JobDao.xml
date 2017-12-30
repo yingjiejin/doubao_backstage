@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.job.dao.JobDao">
+    
+	<sql id="jobColumns">
+		a.id AS "id",
+		a.userid AS "userid",
+		a.area_id AS "area.id",
+		a.title AS "title",
+		a.content AS "content",
+		a.place AS "place",
+		a.wages AS "wages",
+		a.settlement AS "settlement",
+		a.welfare AS "welfare",
+		a.gender_limit AS "genderLimit",
+		a.identity_limit AS "identityLimit",
+		a.age_min_limit AS "ageMinLimit",
+		a.age_max_limit AS "ageMaxLimit",
+		a.type AS "type",
+		a.number_of_people AS "numberOfPeople",
+		a.longitude AS "longitude",
+		a.latitude AS "latitude",
+		a.enroll_begin_date AS "enrollBeginDate",
+		a.enroll_end_date AS "enrollEndDate",
+		a.job_begin_date AS "jobBeginDate",
+		a.job_end_date AS "jobEndDate",
+		a.detailed_date AS "detailedDate",
+		a.status AS "status",
+		a.create_date AS "createDate",
+		a.update_date AS "updateDate",
+		a.exten AS "exten",
+		a.audit_status AS "auditStatus"
+	</sql>
+	
+	<sql id="jobJoins">
+	</sql>
+    
+	<select id="get" resultType="Job">
+		SELECT 
+			<include refid="jobColumns"/>
+		FROM job a
+		<include refid="jobJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Job">
+		SELECT 
+			<include refid="jobColumns"/>
+		FROM job a
+		<include refid="jobJoins"/>
+		<where>
+			
+			<if test="title != null and title != ''">
+				AND a.title LIKE 
+					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{title},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Job">
+		SELECT 
+			<include refid="jobColumns"/>
+		FROM job a
+		<include refid="jobJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO job(
+			id,
+			userid,
+			area_id,
+			title,
+			content,
+			place,
+			wages,
+			settlement,
+			welfare,
+			gender_limit,
+			identity_limit,
+			age_min_limit,
+			age_max_limit,
+			type,
+			number_of_people,
+			longitude,
+			latitude,
+			enroll_begin_date,
+			enroll_end_date,
+			job_begin_date,
+			job_end_date,
+			detailed_date,
+			status,
+			create_date,
+			update_date,
+			exten,
+			audit_status
+		) VALUES (
+			#{id},
+			#{userid},
+			#{areaid},
+			#{title},
+			#{content},
+			#{place},
+			#{wages},
+			#{settlement},
+			#{welfare},
+			#{genderLimit},
+			#{identityLimit},
+			#{ageMinLimit},
+			#{ageMaxLimit},
+			#{type},
+			#{numberOfPeople},
+			#{longitude},
+			#{latitude},
+			#{enrollBeginDate},
+			#{enrollEndDate},
+			#{jobBeginDate},
+			#{jobEndDate},
+			#{detailedDate},
+			#{status},
+			#{createDate},
+			#{updateDate},
+			#{exten},
+			#{auditStatus}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE job SET 	
+			userid = #{userid},
+			area_id = #{area.id},
+			title = #{title},
+			content = #{content},
+			place = #{place},
+			wages = #{wages},
+			settlement = #{settlement},
+			welfare = #{welfare},
+			gender_limit = #{genderLimit},
+			identity_limit = #{identityLimit},
+			age_min_limit = #{ageMinLimit},
+			age_max_limit = #{ageMaxLimit},
+			type = #{type},
+			number_of_people = #{numberOfPeople},
+			longitude = #{longitude},
+			latitude = #{latitude},
+			enroll_begin_date = #{enrollBeginDate},
+			enroll_end_date = #{enrollEndDate},
+			job_begin_date = #{jobBeginDate},
+			job_end_date = #{jobEndDate},
+			detailed_date = #{detailedDate},
+			status = #{status},
+			update_date = #{updateDate},
+			exten = #{exten},
+			audit_status = #{auditStatus}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM job
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

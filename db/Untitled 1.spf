@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>tesla_test15</string>
+			<key>host</key>
+			<string>192.168.10.212</string>
+			<key>kcid</key>
+			<string>-3401418884851769717</string>
+			<key>name</key>
+			<string>212</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>huoqiu</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK8QDwcIFRYXGBkfICEoLDA0OFUkbnVs
+			bNMJCgsMEBRXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6MNDg+A
+			AoADgASjERITgAWABoAKgA5UdHlwZVRyb3dzVGtleXNfECZTZWxl
+			Y3Rpb25EZXRhaWxUeXBlUHJpbWFyeUtleWVkRGV0YWlsc9MJCgsa
+			HB6hG4AHoR2ACIAJVTEyMTAxCdIiIyQlWiRjbGFzc25hbWVYJGNs
+			YXNzZXNfEBNOU011dGFibGVEaWN0aW9uYXJ5oyQmJ1xOU0RpY3Rp
+			b25hcnlYTlNPYmplY3TSCgspK6EqgAuADdILLS4vWU5TLnN0cmlu
+			Z4AMUmlk0iIjMTJfEA9OU011dGFibGVTdHJpbmejMTMnWE5TU3Ry
+			aW5n0iIjNTZeTlNNdXRhYmxlQXJyYXmjNTcnV05TQXJyYXnSIiMm
+			OaImJ18QD05TS2V5ZWRBcmNoaXZlctE8PVRkYXRhgAEACAARABoA
+			IwAtADIANwBJAE8AVgBeAGkAcAB0AHYAeAB6AH4AgACCAIQAhgCL
+			AJAAlQC+AMUAxwDJAMsAzQDPANUA1gDbAOYA7wEFAQkBFgEfASQB
+			JgEoASoBLwE5ATsBPgFDAVUBWQFiAWcBdgF6AYIBhwGKAZwBnwGk
+			AAAAAAAAAgEAAAAAAAAAPgAAAAAAAAAAAAAAAAAAAaY=
+			</data>
+			<key>contentSortCol</key>
+			<string>id</string>
+			<key>contentSortColIsAsc</key>
+			<false/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {1065, 564}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*");
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id)
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = ? and t.is_cancel = ?</string>
+			<key>table</key>
+			<string>subject</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>200</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = false</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = false and t3.name like 企业贷测试测试1</string>
+		<string>%</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = false and t3.name like 企业%</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = false and t3.name like '企业'%accessible</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = false and t3.name like '企业'</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = false and t3.name like '企业%'</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 1 and t.is_cancel = true</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 2 and t.is_cancel = true</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 2 and t.is_cancel = false</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = 5 and t.is_cancel = false</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = ? and t.is_cancel = ?</string>
+		<string>/* Query query = db.from("subject t")
+ .join("left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id")
+ .join("left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1)t3 on t3.subject_id=t.id")
+ .join("left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id")
+ .join("left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id")
+ .where("t.type", querySubjectModel.getType())
+ .where("t.is_cancel", querySubjectModel.isCancel())
+ .select("t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name" ,t.*"); */
+                        
+select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name ,t.*
+from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id)
+left join (select t.* from (select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber , t.* , @con := t.subject_id from subject_payback t,(select @row :=0, @con :='')n where t.status=1 order by t.subject_id desc,t.`period` asc) t where t.rownumber =1) t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id) t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id
+where t.type = ? and t.is_cancel = ?</string>
+		<string>select t3.id pay_id,t3.`plan_payback_at` as pay_interest_end_at, ifnull(t4.count,0) as un_settle_count ,t5.race_name as activity_name,t.* from subject t
+left join (select count(id),`parent_id` from `subject` group by parent_id) t2 on t2.parent_id = t.id
+left join (
+	select t.* from (
+		select case when @con = t.subject_id then @row := @row +1 else @row :=1 end rownumber
+			,t.*
+			,@con := t.subject_id
+		from subject_payback t,(select @row :=0, @con :='')n
+		where t.status=1 
+		order by t.subject_id desc,t.`period` asc
+	)t
+	where t.rownumber =1
+)t3 on t3.subject_id=t.id
+left join (select count(1) as count,subject_id from subject_payback where status=1 group by subject_id)t4 on t.id=t4.subject_id
+left join (select t.subject_id ,t3.name as race_name from olympics_product t left join olympics_projects_items t3 on t3.id=t.`project_item_id`) t5 on t5.subject_id=t.id where t.type = ? and t.is_cancel = ? and (t.status in (?,?,?) or (t.status=6 and (t.valid=0 or t.`collect_begin_at` &gt; now()))) and (t.parent_id is null and t.loan_id&gt;0) and t.cg_subject_flag = ? order by t.created_at desc limit 0, 10]</string>
+		<string>select 0.0311/12*9</string>
+		<string>select 0.0311/12</string>
+		<string>select  (7139*(1+0.0311/12*9))/(9/3)</string>
+		<string>select 7139*(1+0.0311/12*9)</string>
+		<string>/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */</string>
+		<string>tabase tesla</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.6.21</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
